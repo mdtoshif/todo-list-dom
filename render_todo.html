@@ -1,0 +1,50 @@
+<body>
+    <input type = "text"></input>
+    <button onclick = "addTodo()">Add TODO!</button>
+    <script>
+        let todos = [] ;
+        let ctr = 0;
+        function addTodo() {
+            todos.push({
+               title : document.querySelector("input").value
+            }) 
+            render();
+        }
+
+        function deleteTodo(ctr) {
+            console.log(ctr)
+            const elem = document.getElementById("todo-"+ctr)
+            elem.parentNode.removeChild(elem);
+            // render();
+        }
+
+        function render() {
+            const spanEl = document.createElement("span");
+            const buttonEl = document.createElement("button")
+            buttonEl.setAttribute("onclick","deleteTodo("+ctr+")")
+            spanEl.innerHTML =todos[ctr].title ;
+            buttonEl.innerHTML = "Delete";
+
+            const newdiv = document.createElement("div");
+            newdiv.setAttribute("id","todo-"+ctr)
+            newdiv.appendChild(spanEl);
+            newdiv.appendChild(buttonEl);
+            document.querySelector("body").appendChild(newdiv)
+
+
+            
+
+
+
+
+
+
+
+
+           
+        }
+
+
+
+    </script>
+</body>
