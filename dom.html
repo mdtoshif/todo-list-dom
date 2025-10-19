@@ -73,3 +73,160 @@
 	</body>
 	
 </html>		 -->
+
+
+
+
+
+
+
+
+
+
+<html>
+<style>
+        .body{
+                background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+                        display:flex;
+                justify-content: center;
+        }
+
+        .font{
+            word-wrap: break-word;
+            color:rgb(15, 134, 231);
+            font-family: "Gill Sans", sans-serif;
+            font-size: 20px;
+            padding-right:50px;
+
+        }
+
+        .container{
+                width: 45%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                }
+
+        .input {
+                width :80%;
+                flex-grow: 1;
+                border: none; 
+                outline: none; 
+                padding: 8px;
+                font-size: 16px;
+                border-radius: 5px;
+        }
+        .button {
+                border-radius: 5px;
+                border: none;
+                padding: 10px 24px;
+                cursor:pointer;
+                font-weight:500;
+                margin-right :5px
+        }
+        .buttons{
+            border-radius: 5px;
+            padding: 4px;
+            border: none;
+            cursor:pointer;
+
+
+        }
+        .itemss {
+            margin: 10px;
+            display :grid;
+            grid-template-columns: 400px 100px 100px;
+            grid-template-rows: 30px;
+
+        }
+
+</style>
+
+
+
+<body class="body">
+   
+    <div id ="bapu" class ="container">
+        <div>
+        <center><h1 style = "color:#FF69B4;">TODO LIST</h1></center>
+        <hr>
+        <input class ="input" type ="text" placeholder ="Add to do" ></input>
+        <button class ="button" class ="font" onclick = "AddTodo()">Add Todo!</button>
+       </div>
+       <div id ="items">
+       </div>
+            
+    </div>
+    
+</body>
+    <script>
+
+
+        let ctr = 0;
+        var todos = [];
+    
+    function counter() {
+        return ++ctr;
+    }
+
+    function AddTodo() {
+        todos.push({
+            id : counter(),
+            des : document.querySelector("input").value
+        })
+        document.querySelector("input").value = ''
+        render()
+    }
+
+    function EditTodo(index_todo) {
+        let x = prompt("Edit the Todo",todos[index_todo].des)
+        todos[index_todo].des = x;
+        render() 
+    }
+
+    function DeleteTodo(index) {
+        todos = todos.filter((elem) => {
+            return index!== elem.id
+        });
+        render()
+    }  
+ 
+    function createTodoComponent(todo,num_todo) {
+        const div = document.createElement("div");
+        div.setAttribute("id","Todo-"+todo.id);
+        div.setAttribute("class","itemss");
+        const span = document.createElement("span");
+        span.setAttribute("class","font")
+        const del_button = document.createElement("button");
+        const edit_button = document.createElement("button");
+        del_button.setAttribute("onclick","DeleteTodo("+todo.id+")")
+        del_button.setAttribute("class","button")
+        edit_button.setAttribute("onclick","EditTodo("+num_todo+")")
+        edit_button.setAttribute("class","button")
+
+        span.innerHTML = ++num_todo+". "+todo.des
+        del_button.innerHTML = "Delete"
+        edit_button.innerHTML = "Edit"
+        div.appendChild(span)
+        div.appendChild(del_button)
+        div.appendChild(edit_button)
+        return div
+  
+    }
+  
+
+    function render() {
+        document.querySelector("#items").innerHTML = ''
+        for (let i = 0 ; i<todos.length ; i++) {
+            const div = createTodoComponent(todos[i],i)
+            document.querySelector("#items").appendChild(div)
+
+
+
+        }
+    }
+
+    </script>
+
+
+</html>
