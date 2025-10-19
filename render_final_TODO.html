@@ -10,21 +10,20 @@
             word-wrap: break-word;
             color:rgb(15, 134, 231);
             font-family: "Gill Sans", sans-serif;
-            font-size: 24px;
-            margin-bottom: 1em;
+            font-size: 20px;
             padding-right:50px;
-            margin-bottom: 100px;
 
         }
 
         .container{
-                width: 60%;
+                width: 45%;
                 padding: 10px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
                 }
 
         .input {
+                width :80%;
                 flex-grow: 1;
                 border: none; 
                 outline: none; 
@@ -35,8 +34,10 @@
         .button {
                 border-radius: 5px;
                 border: none;
-                 padding: 10px;
-                 cursor:pointer;
+                padding: 10px 24px;
+                cursor:pointer;
+                font-weight:500;
+                margin-right :5px
         }
         .buttons{
             border-radius: 5px;
@@ -44,10 +45,16 @@
             border: none;
             cursor:pointer;
 
+
         }
         .itemss {
-            margin-bottom: 10px;
+            margin: 10px;
+            display :grid;
+            grid-template-columns: 400px 100px 100px;
+            grid-template-rows: 30px;
+
         }
+
 </style>
 
 
@@ -56,9 +63,10 @@
    
     <div id ="bapu" class ="container">
         <div>
-        <center><h1 style = "color:rgb(200, 230, 255);">TODO List</h1></center>
+        <center><h1 style = "color:#FF69B4;">TODO LIST</h1></center>
+        <hr>
         <input class ="input" type ="text" placeholder ="Add to do" ></input>
-        <button class ="button" onclick = "AddTodo()">Add Todo!</button>
+        <button class ="button" class ="font" onclick = "AddTodo()">Add Todo!</button>
        </div>
        <div id ="items">
        </div>
@@ -81,6 +89,7 @@
             id : counter(),
             des : document.querySelector("input").value
         })
+        document.querySelector("input").value = ''
         render()
     }
 
@@ -94,6 +103,7 @@
         todos = todos.filter((elem) => {
             return index!== elem.id
         });
+        render()
     }  
  
     function createTodoComponent(todo,num_todo) {
@@ -105,9 +115,9 @@
         const del_button = document.createElement("button");
         const edit_button = document.createElement("button");
         del_button.setAttribute("onclick","DeleteTodo("+todo.id+")")
-        del_button.setAttribute("class","buttons")
+        del_button.setAttribute("class","button")
         edit_button.setAttribute("onclick","EditTodo("+num_todo+")")
-        edit_button.setAttribute("class","buttons")
+        edit_button.setAttribute("class","button")
 
         span.innerHTML = ++num_todo+". "+todo.des
         del_button.innerHTML = "Delete"
